@@ -1,0 +1,19 @@
+{
+  "name": "shinage-static-player",
+  "version": "0.1.0",
+  "description": "The static component for playing Shinage Digital Signage presentations",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Michael Zapf",
+  "license": "MIT",
+  "devDependencies": {
+    "gulp": "^4.0.0",
+    "gulp-inline-source": "^3.2.0"
+  },
+  "dependencies": {
+    "gulp-environments": "^0.1.2",
+    "jquery": "^3.3.1"
+  }
+}

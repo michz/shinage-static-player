@@ -1,0 +1,22 @@
+language: node_js
+node_js:
+  - '10'
+
+before_script:
+  - npm install
+
+script:
+  - NODE_ENV=production ./node_modules/.bin/gulp
+
+before_deploy:
+  - cd ./dist && tar -czf ./dist/shinage-static-player.tar.gz /player.html
+
+deploy:
+  provider: releases
+  api_key:
+    secure: "L8ihntWsKZi//hOcELSwSVaKpLh4gktmqT17M6Ztd6IhYcQPEl43o4Qlv1EPvuaHU1XzNHgi7MiXIQl2C2eeYXu5vgHHLncyUGX4tWobeB+qxYFK7sf0ZTqhLf9q2R6MLwlO9KFBug+aXLaWQkyUqCTSTunweyQwyYMXXuAXRt50fJW913TWTmIZo0J2OuYK00i/JVkVAo2lnCDwAju74XvnF+izm7ddOHxrajUd+M+zzbtoE7GyadR4CO2UuFfcX8uMgbmFUmkAGQAjsP7vjERLHmj/vJR/Q8iCkcKi8jTcWAE7O6zBzGDS7VTVWsczXASpElwUe7Opwyz+JLhUFExrD2wEXN5vPb9NuIZphZWPYOO97UuW/iNA1wgZamyanOyQscKiwtTolbSR7H4xpkOxhFiRNi9MG6ry3gsKQrN68NtnLb0rSaaWv84Ue2OcRhuEJ6CZecBgp8Jg4wWpOUJnmEOHkeeGdduWeBMiPQyQYcSrNNw3eKGO9iFEjiBA9HgUEPSXEX+Mre26aM+jbqXt22fIq3RYw+pmZhawRFY7w3MvOyKH9XUJag8sHRKWSfsLfdSFlKu3+aTDIEk4W/sw1aZCfdHPNR3fzWyEiZr7QpNUYz/Xvi36Im3963p9ps4VcSwSsNXT7jewBzeodixg5dwVuytf0q+DMI3ksyg="
+  file: "./dist/shinage-static-player.tar.gz"
+  skip_cleanup: true
+  on:
+    tags: true
+    node_js: 7
