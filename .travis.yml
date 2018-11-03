@@ -7,8 +7,6 @@ before_script:
 
 script:
   - NODE_ENV=production ./node_modules/.bin/gulp
-
-before_deploy:
   - mkdir -p ./build
   - cd ./dist && tar -czf ../build/shinage-static-player.tar.gz player.html
 
