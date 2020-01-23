@@ -26,8 +26,6 @@ var urlParamReader = {
 };
 urlParamReader.init();
 
-//console.log(urlParamReader.getUrlParam('test', 'ersatz'));
-
 var player = {
     container: $('#container'),
     remoteCurrentPresentationUrl: '',
@@ -48,7 +46,6 @@ var player = {
                 // @TODO Prüfen was passiert wenn kein Last-Modified-Header geschickt wird
                 that.lastModified = xhr.getResponseHeader("Last-Modified");
                 var url = data.trim();
-                console.log(xhr.getAllResponseHeaders());
 
                 if (that.currentPresentation !== url) {
                     that.currentPresentation = url;
