@@ -7,16 +7,24 @@ before_script:
 
 script:
   - NODE_ENV=production ./node_modules/.bin/gulp
-
-before_deploy:
-  - cd ./dist && tar -czf ./dist/shinage-static-player.tar.gz /player.html
+  - mkdir -p ./build
+  - cd ./dist && tar -czf ../build/shinage-static-player.tar.gz player.html
+  - echo "player.shinage.org" > CNAME
 
 deploy:
-  provider: releases
-  api_key:
-    secure: "L8ihntWsKZi//hOcELSwSVaKpLh4gktmqT17M6Ztd6IhYcQPEl43o4Qlv1EPvuaHU1XzNHgi7MiXIQl2C2eeYXu5vgHHLncyUGX4tWobeB+qxYFK7sf0ZTqhLf9q2R6MLwlO9KFBug+aXLaWQkyUqCTSTunweyQwyYMXXuAXRt50fJW913TWTmIZo0J2OuYK00i/JVkVAo2lnCDwAju74XvnF+izm7ddOHxrajUd+M+zzbtoE7GyadR4CO2UuFfcX8uMgbmFUmkAGQAjsP7vjERLHmj/vJR/Q8iCkcKi8jTcWAE7O6zBzGDS7VTVWsczXASpElwUe7Opwyz+JLhUFExrD2wEXN5vPb9NuIZphZWPYOO97UuW/iNA1wgZamyanOyQscKiwtTolbSR7H4xpkOxhFiRNi9MG6ry3gsKQrN68NtnLb0rSaaWv84Ue2OcRhuEJ6CZecBgp8Jg4wWpOUJnmEOHkeeGdduWeBMiPQyQYcSrNNw3eKGO9iFEjiBA9HgUEPSXEX+Mre26aM+jbqXt22fIq3RYw+pmZhawRFY7w3MvOyKH9XUJag8sHRKWSfsLfdSFlKu3+aTDIEk4W/sw1aZCfdHPNR3fzWyEiZr7QpNUYz/Xvi36Im3963p9ps4VcSwSsNXT7jewBzeodixg5dwVuytf0q+DMI3ksyg="
-  file: "./dist/shinage-static-player.tar.gz"
-  skip_cleanup: true
-  on:
-    tags: true
-    node_js: 10
+  - provider: releases
+    api_key:
+      secure: "YA01P2FF5vHSCwcKfX+x3gmkHX1x8qqEMgjuEWjbI3UA0SAfrapLghncMr1guRPaNtZH6xzUmj4+TzhkFFgyYwVELFqz8DUj6CFHr4AV7valkwb7zemL/mXZGiB2/uzT0n7YjHbvqxIhDp19oowoNvWsGpoLWZ+NbZZc8IrzdrbqX8ARobDhkQzh7kv0JwPdndB4BklNod32Tr2XOlTdriUdpdkmMoJ2cIhD6MSIHdfoOGV6233hCF/6BiyPlyNLByZ2ULhe7clbWWFvub1WAc9qzkGBVVPui8fG3BT8Ub9DGuOF8XnBtuBHKEAW2jaej4GnKQ0RABSVBb6tJoGysIcnK8RFP1UTy5ewE6VrKtlhUPTV3BkylSfXLN9iiWTxBykuK9siiB4Tt8xBDn15+BGZK8QVsQULzmuH9zcf+TxAcj81LCfuaAntTRsJyyCf2Zc5vO2aLhN4tkjlP3Jho2geI9AE3IvpKuiB3yluAJXBICrfXfKT0irhYCYUf8QFyiV5lbXlmf7e4jeks9fzRfYHPCMbAn+EPZFv/8FPPuoOKOyZtRqzX7h85rsZA9kd7VFCksliYO2SFKNfsoc0gfBYNwsWNPtAez3Rw9T4cdJ+Hz9OXrpTlpMjCQbRQ6nkkKyJGdV6sIyAGCysVSifFATCKTGagF1n8/09kifaB3w="
+    file: "./build/shinage-static-player.tar.gz"
+    skip_cleanup: true
+    on:
+      tags: true
+  - provider: pages
+    local-dir: ./dist
+    skip-cleanup: true
+    github-token:
+      secure: "YA01P2FF5vHSCwcKfX+x3gmkHX1x8qqEMgjuEWjbI3UA0SAfrapLghncMr1guRPaNtZH6xzUmj4+TzhkFFgyYwVELFqz8DUj6CFHr4AV7valkwb7zemL/mXZGiB2/uzT0n7YjHbvqxIhDp19oowoNvWsGpoLWZ+NbZZc8IrzdrbqX8ARobDhkQzh7kv0JwPdndB4BklNod32Tr2XOlTdriUdpdkmMoJ2cIhD6MSIHdfoOGV6233hCF/6BiyPlyNLByZ2ULhe7clbWWFvub1WAc9qzkGBVVPui8fG3BT8Ub9DGuOF8XnBtuBHKEAW2jaej4GnKQ0RABSVBb6tJoGysIcnK8RFP1UTy5ewE6VrKtlhUPTV3BkylSfXLN9iiWTxBykuK9siiB4Tt8xBDn15+BGZK8QVsQULzmuH9zcf+TxAcj81LCfuaAntTRsJyyCf2Zc5vO2aLhN4tkjlP3Jho2geI9AE3IvpKuiB3yluAJXBICrfXfKT0irhYCYUf8QFyiV5lbXlmf7e4jeks9fzRfYHPCMbAn+EPZFv/8FPPuoOKOyZtRqzX7h85rsZA9kd7VFCksliYO2SFKNfsoc0gfBYNwsWNPtAez3Rw9T4cdJ+Hz9OXrpTlpMjCQbRQ6nkkKyJGdV6sIyAGCysVSifFATCKTGagF1n8/09kifaB3w="
+    keep-history: false
+    on:
+      branch: master
+
