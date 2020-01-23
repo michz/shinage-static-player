@@ -9,6 +9,7 @@ script:
   - NODE_ENV=production ./node_modules/.bin/gulp
   - mkdir -p ./build
   - cd ./dist && tar -czf ../build/shinage-static-player.tar.gz player.html
+  - echo "player.shinage.org" > CNAME
 
 deploy:
   - provider: releases
