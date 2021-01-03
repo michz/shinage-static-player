@@ -1,0 +1,58 @@
+name: Build
+on:
+  push: ~
+
+jobs:
+  build:
+    runs-on: ubuntu-20.04
+
+    steps:
+      - uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run gulp to build
+        run: NODE_ENV=production ./node_modules/.bin/gulp
+      - name: Create build directory
+        run: mkdir -p ./build
+      - name: Package build
+        run: |
+          cd ./dist &&
+          tar -czf ../build/shinage-static-player.tar.gz player.html
+      - name: Write domain to CNAME file
+        run: echo "player.shinage.org" > CNAME
+
+      - name: Create Release
+        if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+        id: create_release
+        uses: actions/create-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          tag_name: ${{ github.ref }}
+          release_name: ${{ github.ref }}
+          body: ${{ github.ref }}
+          draft: false
+          prerelease: false
+
+      - name: Upload Release Asset
+        if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
+        id: upload-release-asset
+        uses: actions/upload-release-asset@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          upload_url: ${{ steps.create_release.outputs.upload_url }}
+          asset_path: ./build/shinage-static-player.tar.gz
+          asset_name: shinage-static-player.tar.gz
+          asset_content_type: application/gzip
+
+      - name: Deploy to GitHub pages
+        uses: JamesIves/github-pages-deploy-action@3.7.1
+        with:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          BRANCH: gh-pages
+          FOLDER: dist
+          CLEAN: false
+          SINGLE_COMMIT: true
