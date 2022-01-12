@@ -1,6 +1,6 @@
 {
   "name": "shinage-static-player",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "description": "The static component for playing Shinage Digital Signage presentations",
   "main": "index.js",
   "scripts": {
@@ -10,10 +10,10 @@
   "license": "MIT",
   "devDependencies": {
     "gulp": "^4.0.2",
-    "gulp-inline-source": "^3.2.0"
+    "gulp-inline-source": "^4.0.0"
   },
   "dependencies": {
-    "gulp-environments": "^0.1.3",
-    "jquery": "^3.5.0"
+    "gulp-environments": "^1.0.1",
+    "jquery": "^3.6.0"
   }
 }
