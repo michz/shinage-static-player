@@ -1,24 +1,23 @@
-const { src, dest, series, parallel } = require('gulp');
+const { src, dest, series } = require('gulp');
+const webpack = require('webpack-stream');
 const environments = require('gulp-environments');
 const inlinesource = require('gulp-inline-source');
 
 //var development = environments.development;
 var production = environments.production;
 
-
-function html() {
-    var inlineOptions = {
-        compress: false
-    };
-
-    if (production()) {
-        inlineOptions.compress = true;
-    }
-
-    return src('./player.html')
-        .pipe(inlinesource(inlineOptions))
-        .pipe(dest('./dist'));
+exports.buildWebpack = function() {
+    return src('src/js/player.js')
+        .pipe(webpack(require('./webpack.config.js')))
+        .pipe(dest('dist/'));
 }
 
-exports.build = parallel(html);
-exports.default = exports.build;
+exports.htmlInline = function() {
+    return src('src/player.html')
+        .pipe(inlinesource({
+            compress: production(),
+        }))
+        .pipe(dest('dist'));
+}
+
+exports.default = series(exports.buildWebpack, exports.htmlInline)

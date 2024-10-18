@@ -5,8 +5,11 @@ Build
 -----
 
 ```bash
-npm install
-NODE_ENV=production node_modules/gulp/bin/gulp.js
+nvm use
+corepack enable
+yarn install
+NODE_ENV=development yarn run gulp
+#NODE_ENV=production yarn run gulp
 ```
 
 Testing

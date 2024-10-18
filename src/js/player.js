@@ -1,7 +1,12 @@
 ;
 'use strict';
 
-var urlParamReader = {
+import * as jQuery from 'jquery';
+// export for others scripts to use
+//window.$ = $;
+//window.jQuery = jQuery;
+
+const urlParamReader = {
     parts: [],
 
     init: function () {
@@ -9,16 +14,16 @@ var urlParamReader = {
     },
 
     getUrlVars: function () {
-        var vars = {};
-        var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+        const vars = {};
+        /*var parts = */window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
             vars[key] = value;
         });
         return vars;
     },
 
     getUrlParam: function (parameter, defaultValue) {
-        var value = defaultValue;
-        if(window.location.href.indexOf(parameter) > -1) {
+        let value = defaultValue;
+        if (window.location.href.indexOf(parameter) > -1) {
             value = this.parts[parameter];
         }
         return value;
@@ -26,8 +31,8 @@ var urlParamReader = {
 };
 urlParamReader.init();
 
-var player = {
-    container: $('#container'),
+const player = {
+    container: jQuery('#container'),
     remoteCurrentPresentationUrl: '',
     currentPresentation: '',
     lastModified: '0000-00-00 00:00:00',
@@ -38,22 +43,21 @@ var player = {
             urlParamReader.getUrlParam('current_presentation_url', 'http://localhost:8080/test.txt');
     },
     getCurrentPresentation: function () {
-        var that = this;
-        $.ajax({
-            url: that.remoteCurrentPresentationUrl,
+        jQuery.ajax({
+            url: this.remoteCurrentPresentationUrl,
             method: 'get',
-            success: function (data, status, xhr) {
+            success: (data, status, xhr) => {
                 // @TODO Prüfen was passiert wenn kein Last-Modified-Header geschickt wird
-                that.lastModified = xhr.getResponseHeader("Last-Modified");
-                var url = data.trim();
+                this.lastModified = xhr.getResponseHeader("Last-Modified");
+                const url = data.trim();
 
-                if (that.currentPresentation !== url) {
-                    that.currentPresentation = url;
-                    that.showPresentation(url);
+                if (this.currentPresentation !== url) {
+                    this.currentPresentation = url;
+                    this.showPresentation(url);
                 }
             }
         });
-        setTimeout($.proxy(that.getCurrentPresentation, this), that.checkInterval);
+        setTimeout(jQuery.proxy(this.getCurrentPresentation, this), this.checkInterval);
     },
     showPresentation: function (url) {
         this.container.empty();
