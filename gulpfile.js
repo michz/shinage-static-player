@@ -8,7 +8,10 @@ var production = environments.production;
 
 exports.buildWebpack = function() {
     return src('src/js/player.js')
-        .pipe(webpack(require('./webpack.config.js')))
+        .pipe(webpack({
+            ...(require('./webpack.config.js')),
+            ...{mode: production() ? 'production' : 'development'},
+        }))
         .pipe(dest('dist/'));
 }
 

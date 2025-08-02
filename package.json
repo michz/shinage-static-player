@@ -9,10 +9,10 @@
   "author": "Michael Zapf",
   "license": "MIT",
   "devDependencies": {
-    "gulp": "^5.0.0",
+    "gulp": "^5.0.1",
     "gulp-inline-source": "^4.0.0",
-    "webpack": "^5.95.0",
-    "webpack-cli": "^5.1.4",
+    "webpack": "^5.101.0",
+    "webpack-cli": "^6.0.1",
     "webpack-stream": "^7.0.0"
   },
   "dependencies": {
