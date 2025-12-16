@@ -1,10 +1,17 @@
 name: Build
 on:
-  push: ~
+  push:
+    branches: ["*"]
+    tags: ["*"]
+  workflow_dispatch:
+
+concurrency:
+  group: "pages"
+  cancel-in-progress: false
 
 jobs:
   build:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-24.04
 
     steps:
       - uses: actions/checkout@v4
@@ -23,31 +30,64 @@ jobs:
         env:
           NODE_ENV: production
 
-      - name: Create build directory
-        run: mkdir -p ./build
+      - name: Upload pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: './dist'
 
       - name: Package build
         run: |
+          mkdir -p ./build &&
           cd ./dist &&
-          tar -czf ../build/shinage-static-player.tar.gz player.html
+          tar -czvf ../build/shinage-static-player.tar.gz player.html
 
-      - name: Write domain to CNAME file
-        run: echo "player.shinage.org" > CNAME
+      - name: Upload release archive artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: release-archive
+          path: ./build/shinage-static-player.tar.gz
+          retention-days: 2
+
+  release:
+    needs: build
+    runs-on: ubuntu-24.04
+    if: contains(github.ref, 'refs/tags/v')
+
+    # Sets permissions of the GITHUB_TOKEN to allow creating the release
+    permissions:
+      contents: write
+
+    steps:
+      - name: Download the release archive artifact
+        uses: actions/download-artifact@v5
+        with:
+          name: release-archive
 
       - name: Create Release
-        if: github.event_name == 'push' && contains(github.ref, 'refs/tags/')
         id: create_release
         uses: softprops/action-gh-release@v2
         with:
           body: ${{ github.ref }}
           draft: false
           prerelease: false
-          files: build/shinage-static-player.tar.gz
+          files: shinage-static-player.tar.gz
 
-      - name: Deploy to GitHub pages
-        uses: JamesIves/github-pages-deploy-action@v4.6.8
-        with:
-          branch: gh-pages
-          folder: dist
-          clean: false
-          single-commit: true
+  deploy:
+    needs: build
+    runs-on: ubuntu-24.04
+    if: contains(github.ref, 'refs/tags/v')
+
+    # Sets permissions of the GITHUB_TOKEN to allow deployment to GitHub Pages
+    permissions:
+      contents: read
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
