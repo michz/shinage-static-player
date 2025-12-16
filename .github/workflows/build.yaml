@@ -19,7 +19,9 @@ jobs:
           yarn install --frozen-lockfile
 
       - name: Run gulp to build
-        run: NODE_ENV=production yarn run gulp
+        run: yarn run gulp
+        env:
+          NODE_ENV: production
 
       - name: Create build directory
         run: mkdir -p ./build
