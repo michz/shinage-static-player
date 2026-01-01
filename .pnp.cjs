@@ -4020,10 +4020,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["qs", [\
-      ["npm:6.14.0", {\
-        "packageLocation": "../../.yarn/berry/cache/qs-npm-6.14.0-6b298311eb-10c0.zip/node_modules/qs/",\
+      ["npm:6.14.1", {\
+        "packageLocation": "../../.yarn/berry/cache/qs-npm-6.14.1-2af4c28250-10c0.zip/node_modules/qs/",\
         "packageDependencies": [\
-          ["qs", "npm:6.14.0"],\
+          ["qs", "npm:6.14.1"],\
           ["side-channel", "npm:1.1.0"]\
         ],\
         "linkType": "HARD"\
@@ -4754,7 +4754,7 @@ const RAW_RUNTIME_STATE =
           ["formidable", "npm:1.2.6"],\
           ["methods", "npm:1.1.2"],\
           ["mime", "npm:2.6.0"],\
-          ["qs", "npm:6.14.0"],\
+          ["qs", "npm:6.14.1"],\
           ["readable-stream", "npm:3.6.2"],\
           ["semver", "npm:6.3.1"],\
           ["superagent", "npm:5.0.9"]\
