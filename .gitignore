@@ -66,3 +66,4 @@ dist/
 
 .yarn/
 *.iml
+*.idea

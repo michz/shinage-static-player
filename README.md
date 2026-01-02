@@ -8,8 +8,8 @@ Build
 nvm use
 corepack enable
 yarn install
-NODE_ENV=development yarn run gulp
-#NODE_ENV=production yarn run gulp
+NODE_ENV=development yarn run build-dev
+#NODE_ENV=production yarn run  build-prod
 ```
 
 Testing
