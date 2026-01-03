@@ -26,7 +26,9 @@ jobs:
           yarn install --frozen-lockfile
 
       - name: Run production build
-        run: yarn run build-prod
+        run: | 
+          yarn run build-prod
+          cp src/favicon.ico dist/favicon.ico
         env:
           NODE_ENV: production
 

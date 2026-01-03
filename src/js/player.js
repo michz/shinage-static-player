@@ -1,11 +1,6 @@
 ;
 'use strict';
 
-import * as jQuery from 'jquery';
-// export for others scripts to use
-//window.$ = $;
-//window.jQuery = jQuery;
-
 const urlParamReader = {
     parts: [],
 
@@ -32,7 +27,7 @@ const urlParamReader = {
 urlParamReader.init();
 
 const player = {
-    container: jQuery('#container'),
+    container: document.querySelector('#container'),
     remoteCurrentPresentationUrl: '',
     currentPresentation: '',
     lastModified: '0000-00-00 00:00:00',
@@ -41,31 +36,37 @@ const player = {
     init: function () {
         this.remoteCurrentPresentationUrl =
             urlParamReader.getUrlParam('current_presentation_url', 'http://localhost:8080/test.txt');
+
+        // Plan regularly
+        window.setInterval(() => this.getCurrentPresentation(), this.checkInterval);
+
+        // Start immediately
+        this.getCurrentPresentation();
     },
     getCurrentPresentation: function () {
-        jQuery.ajax({
-            url: this.remoteCurrentPresentationUrl,
-            method: 'get',
-            success: (data, status, xhr) => {
-                // @TODO Prüfen was passiert wenn kein Last-Modified-Header geschickt wird
-                this.lastModified = xhr.getResponseHeader("Last-Modified");
-                const url = data.trim();
-
-                if (this.currentPresentation !== url) {
-                    this.currentPresentation = url;
-                    this.showPresentation(url);
-                }
-            }
-        });
-        setTimeout(jQuery.proxy(this.getCurrentPresentation, this), this.checkInterval);
+        window.fetch(this.remoteCurrentPresentationUrl)
+            .then(res => {
+                this.lastModified = res.headers.get('Last-Modified');
+                res.text().then(url => {
+                    url = url.trim();
+                    if (this.currentPresentation !== url) {
+                        this.currentPresentation = url;
+                        this.showPresentation(url);
+                    }
+                });
+            })
+            .catch(err => {
+                console.error(err);
+                // @TODO Better error display?
+            });
     },
     showPresentation: function (url) {
-        this.container.empty();
-        this.container.append(
-            '<iframe src="' + url + '"></iframe>'
-        );
+        this.container.innerHTML = '';
+
+        const iframe = document.createElement('iframe');
+        iframe.src = url;
+        this.container.append(iframe);
     }
 };
 
 player.init();
-player.getCurrentPresentation();

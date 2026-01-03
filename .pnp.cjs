@@ -29,7 +29,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["html-webpack-plugin", "virtual:32e27640a31fb7af5c2e68f604dd08955ce307f3dc7d542091a4328d171534b8580e9804b94c335d7b3b7c082d48e586aeb9d7d40ab4b0ba7a13800a7f569a49#npm:5.6.5"],\
-          ["jquery", "npm:3.7.1"],\
           ["shinage-static-player", "workspace:."],\
           ["webpack", "virtual:32e27640a31fb7af5c2e68f604dd08955ce307f3dc7d542091a4328d171534b8580e9804b94c335d7b3b7c082d48e586aeb9d7d40ab4b0ba7a13800a7f569a49#npm:5.104.1"],\
           ["webpack-cli", "virtual:32e27640a31fb7af5c2e68f604dd08955ce307f3dc7d542091a4328d171534b8580e9804b94c335d7b3b7c082d48e586aeb9d7d40ab4b0ba7a13800a7f569a49#npm:6.0.1"],\
@@ -1259,15 +1258,6 @@ const RAW_RUNTIME_STATE =
         "linkType": "HARD"\
       }]\
     ]],\
-    ["jquery", [\
-      ["npm:3.7.1", {\
-        "packageLocation": "../../.yarn/berry/cache/jquery-npm-3.7.1-eeeac0f21e-10c0.zip/node_modules/jquery/",\
-        "packageDependencies": [\
-          ["jquery", "npm:3.7.1"]\
-        ],\
-        "linkType": "HARD"\
-      }]\
-    ]],\
     ["json-parse-even-better-errors", [\
       ["npm:2.3.1", {\
         "packageLocation": "../../.yarn/berry/cache/json-parse-even-better-errors-npm-2.3.1-144d62256e-10c0.zip/node_modules/json-parse-even-better-errors/",\
@@ -1767,7 +1757,6 @@ const RAW_RUNTIME_STATE =
         "packageLocation": "./",\
         "packageDependencies": [\
           ["html-webpack-plugin", "virtual:32e27640a31fb7af5c2e68f604dd08955ce307f3dc7d542091a4328d171534b8580e9804b94c335d7b3b7c082d48e586aeb9d7d40ab4b0ba7a13800a7f569a49#npm:5.6.5"],\
-          ["jquery", "npm:3.7.1"],\
           ["shinage-static-player", "workspace:."],\
           ["webpack", "virtual:32e27640a31fb7af5c2e68f604dd08955ce307f3dc7d542091a4328d171534b8580e9804b94c335d7b3b7c082d48e586aeb9d7d40ab4b0ba7a13800a7f569a49#npm:5.104.1"],\
           ["webpack-cli", "virtual:32e27640a31fb7af5c2e68f604dd08955ce307f3dc7d542091a4328d171534b8580e9804b94c335d7b3b7c082d48e586aeb9d7d40ab4b0ba7a13800a7f569a49#npm:6.0.1"],\
