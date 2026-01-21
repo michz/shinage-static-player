@@ -1133,7 +1133,7 @@ const RAW_RUNTIME_STATE =
           ["@types/webpack", null],\
           ["html-minifier-terser", "npm:6.1.0"],\
           ["html-webpack-plugin", "virtual:32e27640a31fb7af5c2e68f604dd08955ce307f3dc7d542091a4328d171534b8580e9804b94c335d7b3b7c082d48e586aeb9d7d40ab4b0ba7a13800a7f569a49#npm:5.6.5"],\
-          ["lodash", "npm:4.17.21"],\
+          ["lodash", "npm:4.17.23"],\
           ["pretty-error", "npm:4.0.0"],\
           ["tapable", "npm:2.3.0"],\
           ["webpack", "virtual:32e27640a31fb7af5c2e68f604dd08955ce307f3dc7d542091a4328d171534b8580e9804b94c335d7b3b7c082d48e586aeb9d7d40ab4b0ba7a13800a7f569a49#npm:5.104.1"]\
@@ -1305,10 +1305,10 @@ const RAW_RUNTIME_STATE =
       }]\
     ]],\
     ["lodash", [\
-      ["npm:4.17.21", {\
-        "packageLocation": "../../.yarn/berry/cache/lodash-npm-4.17.21-6382451519-10c0.zip/node_modules/lodash/",\
+      ["npm:4.17.23", {\
+        "packageLocation": "../../.yarn/berry/cache/lodash-npm-4.17.23-50bdb1c01a-10c0.zip/node_modules/lodash/",\
         "packageDependencies": [\
-          ["lodash", "npm:4.17.21"]\
+          ["lodash", "npm:4.17.23"]\
         ],\
         "linkType": "HARD"\
       }]\
@@ -1542,7 +1542,7 @@ const RAW_RUNTIME_STATE =
       ["npm:4.0.0", {\
         "packageLocation": "../../.yarn/berry/cache/pretty-error-npm-4.0.0-7cca1fe4ad-10c0.zip/node_modules/pretty-error/",\
         "packageDependencies": [\
-          ["lodash", "npm:4.17.21"],\
+          ["lodash", "npm:4.17.23"],\
           ["pretty-error", "npm:4.0.0"],\
           ["renderkid", "npm:3.0.0"]\
         ],\
@@ -1628,7 +1628,7 @@ const RAW_RUNTIME_STATE =
           ["css-select", "npm:4.3.0"],\
           ["dom-converter", "npm:0.2.0"],\
           ["htmlparser2", "npm:6.1.0"],\
-          ["lodash", "npm:4.17.21"],\
+          ["lodash", "npm:4.17.23"],\
           ["renderkid", "npm:3.0.0"],\
           ["strip-ansi", "npm:6.0.1"]\
         ],\
